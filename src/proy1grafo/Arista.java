@@ -11,18 +11,22 @@ package proy1grafo;
  * @author labcic
  */
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Iterator;
-import java.util.Set;
+import java.io.*;
+import java.util.*;
 
 public class Arista 
 {
-    public Nodo nodoA;
-    public Nodo nodoB;
+    public int nodoOrigen;  //origen
+    public int nodoDestino;   //destino
+    public int peso;
 
-    Arista(int v, int w) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    Arista(int nodoOrigen, int nodoDestino, int peso) {
+        
+        this.nodoOrigen = nodoOrigen;
+        this.nodoDestino = nodoDestino;
+        this.peso = peso;
+        
+     //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

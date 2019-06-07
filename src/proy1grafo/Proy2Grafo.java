@@ -1,10 +1,25 @@
-/*PROYECTO 1 DE ANALISIS Y DISEÑO DE ALGORITMOS  Grafos aleatorios
+/*PROYECTO 3 DE ANALISIS Y DISEÑO DE ALGORITMOS  Grafos aleatorios
 
   Instituto Politecnico Nacional
   Centro de Investigación en Computación  
 
   Prof. Dr. Rolando Quintero Téllez
   Alumno. Juan Carlos López Núñez
+
+
+
+Proyecto 3 - Algoritmo de Dijkstra 
+ 
+Utilizando la biblioteca de grafos desarrollada en el proyecto 1, implementar el algoritmo de Dijkstra de tal forma que 
+dado un nodo fuente, calculen el árbol de caminos más cortos; es decir, desarrollar el método en la clase Grafo: 
+
+1.Grafo Dijkstra(Nodo s) { ... } Adicionalmente crear un método para asignar valores aleatorios a cada arista,
+dentro de un rango, es decir, desarrollar el método en la clase Grafo: 
+
+
+2.Grafo EdgeValues(float min, float max) { ... } 
+ 
+
 
 
 FUENTES DE INFORMACION
@@ -34,24 +49,10 @@ package proy1grafo;
 
 
 
-import java.io.BufferedWriter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Iterator;
-import java.util.Set;
+import java.io.*;
+import java.util.*;
 
-import java.util.Random;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.util.InputMismatchException;
-
-import java.util.Scanner;
-
-
-public class Proy1Grafo{
+public class Proy2Grafo{
     
     //roy1Grafo graph = new Proy1Grafo();
   
@@ -101,7 +102,8 @@ public class Proy1Grafo{
             System.out.println("Demasiados pocas aristas");
         else{ 
             //generacion del grafo aleatorio
-            Grafo grafo1 = new Grafo();
+            Grafo grafo1 = new Grafo(v);
+            Grafo grafoa = new Grafo(v);
 
            // HashMap<Integer, Integer> establecer = new HashMap<>();
          
@@ -189,8 +191,60 @@ public class Proy1Grafo{
                         break;
 
                         case 'c':                         
-                           grafo1.crearGrafoGeo(num_nodos, rprob, dirigido, ciclos);
+                           grafoa = grafo1.crearGrafoGeo(num_nodos, rprob, dirigido, ciclos);
+                           
+                           //-------------------------------OPCIONES DE ALGORITMO DFS Y BFS PARA ALGORITMO GEOMETRICO-------------------- 
+                           
+                           do{    
+                                //leer caracter de salida
+                                /*
+                                System.out.println("Seleccione el algoritmo para recorrer el grafo geometrico");
+                                System.out.println("a.-BFS(Busqueda por amplitud)");
+                                System.out.println("b.-DFS(Busqueda por profundidad) Iterativo");
+                                System.out.println("c.-DFS(Búsqueda por profundiad) recursivo");*/
                         
+                                c = leer.next().charAt(0);
+                                int val;            
+                                //seleccionar grafo DFSi DFSr BFS           
+                                switch(c){               
+                                    case 'a': 
+
+                                       // do{
+                                            System.out.println("Ingrese el nodo origen");
+                                            val = leer.nextInt();                        
+                                            grafo1.BFSGEO(val, grafoa);
+                                    break;
+                                    case 'b':
+                                       // do{
+                                            System.out.println("Ingrese el nodo origen");
+                                            val = leer.nextInt();             
+                                            grafo1.DFSiterativoGEO(val, grafoa);
+                                    break;
+
+                                    case 'c':
+                                      //  do{
+                                            System.out.println("Ingrese el nodo origen");
+                                            val = leer.nextInt();
+
+                                      //  }while(val != 0);                    
+                                           grafo1.DFSrecursivoGEO(val, grafoa);
+                                    break;
+                                    
+                        
+
+                                     default:
+                                        System.out.println("Opcion incorrecta intente de nuevo");
+                                        break;
+
+                                }//fin de switch para elegir algoritmo de busquedad
+
+                                System.out.println("Desea una nueva seleccion?('a'|cualquier otro caracter para salir )");
+                                c = leer.next().charAt(0);
+
+                            }while(c == 'a');                     
+                           
+                           //--------------------------------------------FIN DE SELECCION PARA GRAFO GEO-------------------------------------------------
+
                         break;
                         case 'd':                 
                           
@@ -201,7 +255,83 @@ public class Proy1Grafo{
                             System.out.println("OPcion incorrecta, intente de nuevo");
                         break;
             }
+                
+        System.out.println("¿Desea generar un nuevo grafo?('a'|cualquier otro caracter para continuar )");
+        c = leer.next().charAt(0);
+            
+        }while(c == 'a');        
+            
+        do{    
             //leer caracter de salida
+            System.out.println("Seleccione el algoritmo para recorrer el grafo");
+            System.out.println("a.-BFS(Busqueda por amplitud)");
+            System.out.println("b.-DFS(Busqueda por profundidad) Iterativo");
+            System.out.println("c.-DFS(Búsqueda por profundiad) recursivo");
+            System.out.println("d.-DIJKSTRA");
+            System.out.println("e.-Algoritmo de arbol de expansión minimo por Kruskal ");
+            System.out.println("f.-Algoritmo de arbol de expansion minimo por Prim ");
+            
+            c = leer.next().charAt(0);
+            int val;            
+            //seleccionar grafo DFS BFS           
+            switch(c){               
+                case 'a': 
+                    
+                   // do{
+                        System.out.println("Ingrese el nodo origen");
+                        val = leer.nextInt();                        
+                        grafo1.BFS(val);
+                break;
+                case 'b':
+                   // do{
+                        System.out.println("Ingrese el nodo origen");
+                        val = leer.nextInt();             
+                        grafo1.DFSiterativo(val);
+                break;
+                    
+                case 'c':
+                  //  do{
+                        System.out.println("Ingrese el nodo origen");
+                        val = leer.nextInt();
+                        
+                  //  }while(val != 0);                    
+                       grafo1.DFSrecursivo(val);
+                break;
+                
+                case 'd':
+                        System.out.println("Ingrese el nodo origen");
+                        val = leer.nextInt();
+                        grafo1.origen = val;
+                        grafo1.ejecutarDijkstra(val);
+
+                break;
+                
+                      case 'e':
+                        System.out.println("Ingrese el nodo origen");
+                        val = leer.nextInt();
+                        grafo1.origen = val;
+                        grafo1.ejecutarDijkstra(val);
+
+                break;
+                
+                        case 'f':
+                        System.out.println("Ingrese el nodo origen");
+                        val = leer.nextInt();
+                        grafo1.origen = val;
+                        grafo1.ejecutarDijkstra(val);
+
+                break;
+                                    
+                
+                 default:
+                    System.out.println("Opcion incorrecta intente de nuevo");
+                    break;
+                    
+            }//fin de switch para elegir algoritmo de busquedad
+            
+            
+            
+            
             System.out.println("Desea una nueva seleccion?('a'|cualquier otro caracter para salir )");
             c = leer.next().charAt(0);
             
@@ -213,10 +343,7 @@ public class Proy1Grafo{
             
     
     }//fin del metodo main
-    
-    
-    
-
+  
 }//fin de clase
 
 
